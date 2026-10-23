@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Nathan Bawa | Interior Visualization</title>
+<link rel="icon" type="image/png" href="images/arkiteksstudio-high-resolution-logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Pannellum CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#F9F7F2;
+    color:#222;
+    overflow-x:hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ========================= */
+/* GLOBAL */
+/* ========================= */
+
+.container{
+    width:94%;
+    max-width:1800px;
+    margin:auto;
+}
+
+.section{
+    padding:80px 0;
+}
+
+.section-tag{
+    font-size:10px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:#777;
+    margin-bottom:15px;
+    font-weight:500;
+}
+
+img{
+    width:100%;
+    display:block;
+    transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+a{
+    text-decoration:none;
+}
+
+/* ========================= */
+/* NAV */
+/* ========================= */
+
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 10px 0;
+    background: transparent;
+    pointer-events: none;
+}
+
+.site-nav::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(235, 230, 220, 0.9);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    opacity: 0;
+    will-change: opacity;
+    transition: opacity 0.22s ease-out;
+    z-index: -1;
+}
+
+.site-nav.scrolled::before {
+    opacity: 1;
+}
+
+.nav-inner {
+    width: 94%;
+    max-width: 1800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.logo-text {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #111;
+}
+
+.nav-profile-pic {
+    height: 76px;
+    width: 76px;
+    object-fit: cover;
+    border-radius: 50%;
+    transform-origin: top left;
+    transform: translateZ(0) scale(1);
+    will-change: transform;
+    transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (min-width: 769px) {
+    .nav-profile-pic {
+        height: 86px;
+        width: 86px;
+        object-fit: cover;
+        border-radius: 50%;
+        transform: translate3d(0, 6px, 0) scale(2.05);
+    }
+    .site-nav.scrolled .nav-profile-pic {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.quick-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.quick-btn {
+    --bg: #000;
+    --hover-bg: #a70c39;
+    --hover-text: #fff;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid var(--bg);
+    border-radius: 0;
+    padding: 1.05em 2.35em;
+    background: var(--bg);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+}
+
+.quick-btn:hover {
+    color: var(--hover-text);
+    transform: translate(-0.25rem, -0.25rem);
+    background: var(--hover-bg);
+    box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+.quick-btn:active {
+    transform: translate(0);
+    box-shadow: none;
+}
+
+.quick-btn.active {
+    background: red;
+    color: #fff;
+    border-color: red;
+}
+
+.quick-btn.nav-cta-btn {
+    --bg: #fff;
+    color: #111;
+    border: 1px solid #111;
+    background: #fff;
+}
+
+.quick-btn.nav-cta-btn:hover {
+    color: var(--hover-text);
+    transform: translate(-0.25rem, -0.25rem);
+    background: var(--hover-bg);
+    border-color: var(--hover-bg);
+    box-shadow: 0.25rem 0.25rem #000;
+}
+
+/* ========================= */
+/* HERO (YORK-INSPIRED SPLIT) */
+/* ========================= */
+
+:root {
+    --hero-bg: #F9F7F2;
+    --hero-text: #111111;
+    --hero-muted: #555555;
+    --hero-accent: #111111;
+    --hero-accent-hover: #a70c39;
+    --hero-col-max: 600px;
+    --hero-gap: clamp(32px, 5vw, 80px);
+    --hero-pad-x: 3%;
+    --hero-pad-y: clamp(130px, 14vh, 170px);
+}
+
+.split-hero {
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    background-color: var(--hero-bg);
+    color: var(--hero-text);
+    min-height: 100vh;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--hero-gap);
+    padding: var(--hero-pad-y) var(--hero-pad-x) clamp(40px, 6vh, 70px);
+    position: relative;
+}
+
+.split-hero__text {
+    width: 100%;
+    max-width: var(--hero-col-max);
+    justify-self: end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.split-hero__eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #777777;
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+}
+
+.split-hero__headline {
+    font-size: clamp(2.6rem, 6vw, 5.2rem);
+    font-weight: 300;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--hero-text);
+    margin-bottom: 1.5rem;
+}
+
+.split-hero__desc {
+    font-size: clamp(1rem, 1.15vw, 1.15rem);
+    line-height: 1.65;
+    color: var(--hero-muted);
+    font-weight: 400;
+    max-width: 52ch;
+    margin-bottom: 2.25rem;
+}
+
+.split-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.split-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1rem 2rem;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 0; /* Square corners */
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.split-hero__btn--primary {
+    background-color: var(--hero-accent);
+    color: #ffffff;
+    border: 1px solid var(--hero-accent);
+}
+
+.split-hero__btn--primary:hover {
+    background-color: var(--hero-accent-hover);
+    border-color: var(--hero-accent-hover);
+    transform: translate(-0.25rem, -0.25rem);
+    box-shadow: 0.25rem 0.25rem #000;
+}
+
+.split-hero__btn--secondary {
+    background-color: transparent;
+    color: var(--hero-text);
+    border: 1px solid rgba(17, 17, 17, 0.35);
+}
+
+.split-hero__btn--secondary:hover {
+    background-color: var(--hero-accent-hover);
+    border-color: var(--hero-accent-hover);
+    color: #ffffff;
+    transform: translate(-0.25rem, -0.25rem);
+    box-shadow: 0.25rem 0.25rem #000;
+}
+
+/* Right Column: Full-Width Video Player */
+.split-hero__media {
+    width: 100%;
+    max-width: 100%;
+    justify-self: stretch;
+    display: flex;
+    flex-direction: column;
+}
+
+.split-hero__frame {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    background: transparent;
+}
+
+.split-hero__video-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.split-hero__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.split-hero__play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    background: rgba(15, 15, 16, 0.65);
+    backdrop-filter: blur(6px);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.25s ease, background-color 0.25s ease, opacity 0.3s ease;
+    z-index: 2;
+}
+
+.split-hero__play-btn:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    background: var(--hero-accent-hover);
+    color: #ffffff;
+    border-color: var(--hero-accent-hover);
+}
+
+.split-hero__play-btn.is-playing {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.split-hero__video-wrap:hover .split-hero__play-btn.is-playing {
+    opacity: 0.85;
+    pointer-events: auto;
+}
+
+.split-hero__play-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+.split-hero__caption {
+    margin-top: 0.75rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #777777;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 900px) {
+    .split-hero {
+        grid-template-columns: 1fr;
+        padding-top: 120px;
+    }
+
+    .split-hero__text {
+        justify-self: center;
+        max-width: var(--hero-col-max);
+    }
+
+    .split-hero__media {
+        justify-self: stretch;
+        max-width: 100%;
+    }
+
+    .split-hero__video-wrap {
+        aspect-ratio: 4 / 3;
+    }
+}
+
+/* ========================= */
+/* INTRO STATEMENT */
+/* ========================= */
+
+.intro-statement {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 30px 0;
+}
+
+.intro-content {
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.intro-content p {
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.6;
+    font-weight: 500;
+    color: #222;
+    letter-spacing: 0;
+}
+
+/* ========================= */
+/* EDITORIAL TYPOGRAPHY */
+/* ========================= */
+
+.project-content{
+    max-width:280px;
+}
+
+.project-content h3{
+    font-size:22px;
+    margin-bottom:12px;
+    letter-spacing:-0.5px;
+    font-weight:600;
+    color:#111;
+}
+
+.project-content p{
+    color:#333;
+    line-height:1.7;
+    font-size:14px;
+    font-weight:500;
+}
+
+/* ========================= */
+/* LAYOUT RHYTHM (PROJECTS) */
+/* ========================= */
+
+.projects-list{
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+}
+
+.image-container{
+    overflow:hidden;
+    position:relative;
+}
+
+.image-container:hover img{
+    transform:scale(1.03);
+}
+
+/* Project 1: Fullscreen Hero */
+.layout-full{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.layout-full .image-full{
+    width:100%;
+    aspect-ratio:21/9;
+}
+
+.layout-full .project-meta{
+    display:flex;
+    justify-content:flex-end;
+}
+
+/* Project 2: Split Images */
+.layout-split{
+    display:grid;
+    grid-template-columns:2.5fr 7.5fr;
+    gap:40px;
+    align-items:start;
+}
+
+.split-images{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.split-images .image-container{
+    aspect-ratio:3/4;
+}
+
+/* Project 3: Asymmetric Crop */
+.layout-asymmetric{
+    display:grid;
+    grid-template-columns:7.5fr 2.5fr;
+    gap:30px;
+}
+
+.layout-asymmetric .image-large{
+    aspect-ratio:16/9;
+}
+
+.layout-asymmetric .side-content{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.layout-asymmetric .image-detail{
+    aspect-ratio:4/5;
+    margin-bottom:20px;
+}
+
+/* Project 4: 360 Immersive */
+.layout-360{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.layout-360 .image-full{
+    width:100%;
+    aspect-ratio:16/9;
+}
+
+.layout-360 .project-meta{
+    display:flex;
+    justify-content:flex-start;
+}
+
+/* ========================= */
+/* 360 INTEGRATION BADGE */
+/* ========================= */
+
+.badge-360{
+    background:#111;
+    color:#fff;
+    padding:15px 25px;
+    border-radius:0; /* Squared */
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    transition:0.2s ease;
+    cursor:pointer;
+    align-self:flex-start;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
+    transform: translateY(0);
+}
+
+.badge-360:hover{
+    background:#222;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.badge-360:active{
+    background:#000;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.15);
+    transform: translateY(4px);
+}
+
+.badge-360::before{
+    content:'';
+    display:inline-block;
+    width:5px;
+    height:5px;
+    background:#fff;
+    border-radius:50%;
+}
+
+/* ========================= */
+/* IMAGE CLICK INDICATOR */
+/* ========================= */
+
+.click-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(17, 17, 17, 0.5);
+    backdrop-filter: blur(4px);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    z-index: 5;
+    pointer-events: none;
+    animation: pulseClick 2s infinite ease-in-out;
+}
+
+.click-indicator i {
+    font-size: 24px;
+    color: white;
+}
+
+@keyframes pulseClick {
+    0% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3); }
+    70% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+    100% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+/* ========================= */
+/* 360 VIEWER OVERLAY */
+/* ========================= */
+
+#vr-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s ease;
+}
+
+#vr-overlay.vr-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#panorama {
+    width: 100%;
+    height: 100%;
+}
+
+#vr-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    z-index: 10001;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.vr-loading-hidden {
+    opacity: 0 !important;
+}
+
+.vr-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 10002;
+    transition: 0.3s;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    user-select: none;
+}
+
+.vr-close:hover {
+    color: #ccc;
+    transform: scale(1.1);
+}
+
+.vr-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 50px;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 10000;
+    padding: 20px;
+    transition: 0.3s;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    user-select: none;
+}
+
+.vr-nav:hover {
+    color: #ccc;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.vr-prev { left: 20px; }
+.vr-next { right: 20px; }
+
+/* ========================= */
+/* 360 INTERACTION PROMPT */
+/* ========================= */
+
+#vr-interaction-prompt {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    z-index: 10005;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#vr-interaction-prompt.show-prompt {
+    opacity: 0.85;
+    visibility: visible;
+}
+
+.hand-icon {
+    width: 36px;
+    height: 36px;
+    stroke: white;
+    fill: none;
+    stroke-width: 1.5;
+    animation: dragHand 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+}
+
+.prompt-text {
+    color: white;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+#panorama {
+    width: 100%;
+    height: 100%;
+}
+
+#vr-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    z-index: 10001;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.vr-loading-hidden {
+    opacity: 0 !important;
+}
+
+.vr-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 10002;
+    transition: 0.3s;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    user-select: none;
+}
+
+.vr-close:hover {
+    color: #ccc;
+    transform: scale(1.1);
+}
+
+.vr-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 50px;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 10000;
+    padding: 20px;
+    transition: 0.3s;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    user-select: none;
+}
+
+.vr-nav:hover {
+    color: #ccc;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.vr-prev { left: 20px; }
+.vr-next { right: 20px; }
+
+/* ========================= */
+/* 360 INTERACTION PROMPT */
+/* ========================= */
+
+#vr-interaction-prompt {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    z-index: 10005;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#vr-interaction-prompt.show-prompt {
+    opacity: 0.85;
+    visibility: visible;
+}
+
+.hand-icon {
+    width: 36px;
+    height: 36px;
+    stroke: white;
+    fill: none;
+    stroke-width: 1.5;
+    animation: dragHand 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+}
+
+.prompt-text {
+    color: white;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+@keyframes dragHand {
+    0% { transform: translateX(0px); }
+    25% { transform: translateX(-20px) rotate(-5deg); }
+    75% { transform: translateX(20px) rotate(5deg); }
+    100% { transform: translateX(0px); }
+}
+
+/* ========================= */
+/* HERO SCROLL BUTTON */
+/* ========================= */
+
+.scroll-cue-container {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    animation: floatBounce 2.5s infinite ease-in-out;
+}
+
+@keyframes floatBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+}
+
+.hero-scroll-btn {
+    padding: 14px 28px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    display: inline-block;
+}
+
+.hero-scroll-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.hero-scroll-btn:active {
+    transform: scale(0.95);
+}
+
+@media(max-width: 768px) {
+    .scroll-cue-container {
+        bottom: 30px;
+    }
+    .hero-scroll-btn {
+        padding: 12px 24px;
+        font-size: 12px;
+    }
+}
+
+/* ========================= */
+/* ABOUT / CONTACT (CENTERED) */
+/* ========================= */
+
+.about-section-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile-centered {
+    margin-bottom: 20px;
+}
+
+.profile-pic-large {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 10px auto;
+}
+
+.profile-centered h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #111;
+}
+
+.profile-centered p {
+    font-size: 14px;
+    color: #666;
+}
+
+.about-text-centered h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: -1.5px;
+    font-weight: 500;
+    color: #111;
+    margin-bottom: 15px;
+}
+
+.about-text-centered p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.circle-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.circle-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+    transition: 0.3s;
+}
+
+.circle-btn:hover {
+    background: #111;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.circle-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.footer-logo-icon {
+    color: #111;
+    margin-bottom: 10px;
+}
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+footer{
+    padding:30px 0;
+    text-align:center;
+    color:#888;
+    font-size:10px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+}
+
+/* ========================= */
+/* IMAGE LIGHTBOX OVERLAY */
+/* ========================= */
+
+#image-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.95);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+}
+
+#image-lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#lightbox-img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media(max-width:1100px){
+
+    .hero-grid,
+    .layout-split,
+    .layout-asymmetric,
+    .about-section{
+        grid-template-columns:1fr;
+        gap:24px;
+    }
+
+    .layout-asymmetric .side-content{
+        flex-direction:column-reverse;
+    }
+
+    .layout-asymmetric .image-detail{
+        display:none; /* Simplify on mobile */
+    }
+
+    .split-images{
+        grid-template-columns:1fr;
+    }
+
+    .site-nav {
+        padding: 10px 0;
+    }
+
+    .nav-profile-pic {
+        width: 64px;
+        height: 64px;
+        transform: translate3d(0, 2px, 0) scale(1.25);
+    }
+
+    .site-nav.scrolled .nav-profile-pic {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .quick-buttons {
+        gap: 6px;
+        justify-content: flex-end;
+    }
+
+    .quick-btn {
+        padding: 0.8em 1.3em;
+        font-size: 11px;
+        letter-spacing: 1.5px;
+    }
+
+    .hero {
+        min-height: auto;
+        padding-top: 120px;
+        padding-bottom: 30px;
+        align-items: center;
+    }
+
+    .hero-text {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-text h1 {
+        margin-bottom: 20px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .hero-image{
+        aspect-ratio: 4/5;
+    }
+
+    .project-content {
+        max-width: 100%;
+    }
+
+    .layout-full .project-meta {
+        justify-content: flex-start;
+    }
+
+    .section{
+        padding:30px 0;
+    }
+
+    .projects-list{
+        gap:36px;
+    }
+
+    .vr-close {
+        top: 20px;
+        right: 20px;
+        font-size: 35px;
+    }
+
+    .vr-nav {
+        font-size: 35px;
+        padding: 10px;
+    }
+}
+
+@media(max-width:640px){
+
+    .site-nav {
+        padding: 8px 0;
+    }
+
+    .nav-inner {
+        width: 94%;
+        gap: 10px;
+    }
+
+    .nav-profile-pic {
+        width: 48px;
+        height: 48px;
+        transform: translate3d(0, 0, 0) scale(1.15);
+    }
+
+    .site-nav.scrolled .nav-profile-pic {
+        transform: translate3d(0, 0, 0) scale(0.95);
+    }
+
+    .nav-right {
+        flex: 1;
+        justify-content: flex-end;
+        min-width: 0;
+    }
+
+    .quick-buttons {
+        gap: 5px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .quick-btn {
+        padding: 0.65em 0.9em;
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    .quick-btn:hover {
+        transform: translate(-0.15rem, -0.15rem);
+        box-shadow: 0.15rem 0.15rem var(--bg);
+    }
+
+    .hero {
+        padding-top: 105px;
+        padding-bottom: 20px;
+    }
+
+    .hero-text h1 {
+        font-size: clamp(2.6rem, 11vw, 3.6rem);
+        line-height: 0.98;
+        letter-spacing: -1.5px;
+        margin-bottom: 16px;
+    }
+
+    .hero-image {
+        aspect-ratio: 1/1;
+    }
+
+    .intro-statement {
+        padding: 15px 0 25px 0;
+    }
+
+    .layout-full .image-full,
+    .layout-360 .image-full,
+    .layout-asymmetric .image-large {
+        aspect-ratio: 4/3;
+    }
+
+    .badge-360 {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 360 VIEWER OVERLAY -->
+<div id="vr-overlay">
+    <div class="vr-close" onclick="closeVR()">×</div>
+    <div class="vr-nav vr-prev" onclick="prevVR()">&#10094;</div>
+    <div class="vr-nav vr-next" onclick="nextVR()">&#10095;</div>
+    <div id="vr-loading" class="vr-loading-hidden">LOADING 360°...</div>
+    
+    <div id="vr-interaction-prompt">
+        <svg class="hand-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
+            <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
+            <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
+            <path d="M18 11v6.5a6.5 6.5 0 0 1-6.5 6.5h-1a6.5 6.5 0 0 1-6.5-6.5v-8.5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v3"></path>
+        </svg>
+        <div class="prompt-text">Drag to rotate</div>
+    </div>
+
+    <div id="panorama"></div>
+
+</div>
+
+<!-- IMAGE LIGHTBOX OVERLAY -->
+<div id="image-lightbox" onclick="closeLightbox()">
+    <div class="vr-close">×</div>
+    <img id="lightbox-img" src="" alt="Fullscreen View">
+</div>
+
+<!-- ========================= -->
+<!-- NAV -->
+<!-- ========================= -->
+
+<nav class="site-nav" id="site-nav">
+    <div class="nav-inner">
+        <div class="logo">
+            <img src="images/arkiteksstudio-high-resolution-logo (3).png" alt="Arkiteks Studio Logo" class="nav-profile-pic">
+        </div>
+
+        <div class="nav-right">
+            <div class="quick-buttons">
+                <a href="#work" class="quick-btn" onclick="selectBtn(this)">Work</a>
+                <a href="#about" class="quick-btn" onclick="selectBtn(this)">Studio</a>
+                <a href="#work" class="quick-btn" onclick="selectBtn(this)">Services</a>
+                <a href="#about" class="quick-btn" onclick="selectBtn(this)">Contact</a>
+                <a href="#about" class="quick-btn nav-cta-btn" onclick="selectBtn(this)">Book a call</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ========================= -->
+<!-- HERO (YORK-INSPIRED SPLIT) -->
+<!-- ========================= -->
+
+<section class="split-hero">
+    <!-- Left Column: Text -->
+    <div class="split-hero__text">
+        <span class="split-hero__eyebrow">Interior Visualization</span>
+        <h1 class="split-hero__headline">
+            Spaces before<br>they exist
+        </h1>
+        <p class="split-hero__desc">
+            Partnering with designers and architects to craft photorealistic, emotionally resonant visual narratives of unbuilt spaces.
+        </p>
+        <div class="split-hero__actions">
+            <a href="#work" class="split-hero__btn split-hero__btn--primary">View Selected Work</a>
+            <a href="#about" class="split-hero__btn split-hero__btn--secondary">Studio</a>
+        </div>
+    </div>
+
+    <!-- Right Column: Media with Accent Frame & Offset Outline -->
+    <div class="split-hero__media">
+        <div class="split-hero__frame">
+            <div class="split-hero__video-wrap">
+                <!-- === SWAP VIDEO SOURCE AND POSTER IMAGE HERE === -->
+                <video
+                    id="hero-video"
+                    class="split-hero__video"
+                    poster="images/4.png"
+                    autoplay
+                    muted
+                    playsinline
+                >
+                    <source src="images/appartvideo.MP4" type="video/mp4">
+                </video>
+                <button
+                    type="button"
+                    id="hero-play-btn"
+                    class="split-hero__play-btn is-playing"
+                    aria-label="Toggle video playback"
+                >
+                    <svg id="hero-play-icon" viewBox="0 0 24 24">
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="split-hero__caption">
+            <span>Featured Reel — Architectural CGI</span>
+            <span>01 / 02</span>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+
+<!-- ========================= -->
+<!-- PROJECTS (RHYTHMIC LAYOUTS) -->
+<!-- ========================= -->
+
+<section class="section section-no-border" id="work">
+    
+    <div class="projects-list">
+
+        <!-- Scene 4: 360 Immersive -->
+        <div class="layout-360">
+            <div class="image-full image-container" onclick="openVR(0)" style="cursor: pointer;">
+                <div class="click-indicator">
+                    <i class="bi bi-hand-index"></i>
+                </div>
+                <!-- Using one of the specific 360 images as the fallback cover -->
+                <img src="images/360photoconverterlivingroom.jpg" alt="Penthouse 360">
+            </div>
+            <div class="badge-360" onclick="openVR(0)">Explore in 360°</div>
+            <div class="project-meta">
+                <div class="project-content">
+                    <div class="section-tag">Interactive Environment</div>
+                    <h3>Interactive 360°</h3>
+                    <p>Step inside fully rendered panoramic spaces.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 1: Huge Hero Image -->
+        <div class="layout-full">
+            <div class="image-full image-container" onclick="openLightbox(this.querySelector('img').src)" style="cursor: zoom-in;">
+                <img src="images/4.png" alt="Rosedale Residence">
+            </div>
+            <div class="project-meta">
+                <div class="project-content">
+                    <div class="section-tag">Residential Architecture</div>
+                    <h3>Modern Residence</h3>
+                    <p>High-end exterior architecture and landscape visualization.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 2: Split Details -->
+        <div class="layout-split">
+            <div class="project-content">
+                <div class="section-tag">Concept & Lighting</div>
+                <h3>Moody Interiors</h3>
+                <p>Exploring dark tones, brutalist textures, and natural light.</p>
+            </div>
+            <div class="image-container" onclick="openLightbox(this.querySelector('img').src)" style="cursor: zoom-in;">
+                <img src="images/distopiankitchan.png" alt="Kitchen Detail">
+            </div>
+        </div>
+
+
+
+        <!-- Scene 3: Asymmetric Crop -->
+        <div class="layout-asymmetric">
+            <div class="image-large image-container" onclick="openLightbox(this.querySelector('img').src)" style="cursor: zoom-in;">
+                <img src="images/kitchencloseups.png" alt="Annex Loft">
+            </div>
+            <div class="side-content">
+                <div class="image-detail image-container" onclick="openLightbox(this.querySelector('img').src)" style="cursor: zoom-in;">
+                    <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80&w=1000&auto=format&fit=crop" alt="Material Crop">
+                </div>
+                <div class="project-content">
+                    <div class="section-tag">Interior Detail</div>
+                    <h3>Material Focus</h3>
+                    <p>Close-up rendering of premium cabinetry and marble finishes.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================= -->
+<!-- ABOUT & CONTACT -->
+<!-- ========================= -->
+
+<section class="section" id="about">
+    <div class="about-section-centered">
+        
+        <div class="about-text-centered">
+            <h2>START A PROJECT</h2>
+            <p>Nathan Bawa focuses on helping interior designers, architects, and developers communicate spaces emotionally before construction begins.</p>
+        </div>
+
+        <div class="profile-centered">
+            <img src="images/nathan bawa image.jpg" alt="Nathan Bawa" class="profile-pic-large">
+            <h3>Nathan Bawa</h3>
+            <p>Founder & 3D Artist — Toronto, Ontario</p>
+        </div>
+
+        <div class="circle-links">
+            <a href="mailto:urbanstage3d@gmail.com" class="circle-btn" aria-label="Email" onclick="copyEmail(event)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/nathan-bawa-a94082333/" class="circle-btn" target="_blank" aria-label="LinkedIn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="tel:+16475466982" class="circle-btn" aria-label="Phone">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </a>
+        </div>
+        
+        <div class="footer-logo-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    Nathan Bawa © 2026 — Spatial Communication
+</footer>
+
+</div>
+
+<!-- Pannellum JS -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+<script>
+    
+    // List of the specific 360 local images
+    const images360 = [
+        "images/fb30.png",
+        "images/360photoconverterhoteroom.jpg",
+        "images/housev3converter.jpg",
+        "images/360photoconverterlivingroom.jpg",
+        "images/360kitchen.png",
+        "images/3.png"
+    ];
+    let currentIndex = 0;
+    let viewer = null;
+    let hasInteractedWithVR = false;
+
+    function openVR(index = 0) {
+        currentIndex = index;
+        document.getElementById('vr-overlay').classList.add('vr-active');
+        document.body.style.overflow = 'hidden'; // prevent background scrolling
+        
+        loadPanorama();
+    }
+
+    function closeVR() {
+        document.getElementById('vr-overlay').classList.remove('vr-active');
+        document.body.style.overflow = ''; // restore scrolling
+        
+        if (viewer) {
+            viewer.destroy();
+            viewer = null;
+        }
+    }
+
+    function loadPanorama() {
+        if (viewer) {
+            viewer.destroy();
+        }
+        
+        // Show loading indicator
+        document.getElementById('vr-loading').classList.remove('vr-loading-hidden');
+        
+        const imgSrc = images360[currentIndex];
+        
+        viewer = pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": imgSrc,
+            "autoLoad": true,
+            "showControls": false,
+            "hfov": 85,
+            "minHfov": 50,
+            "maxHfov": 100,
+            "pitch": 0,
+            "yaw": 0,
+            "autoRotate": hasInteractedWithVR ? 0 : -1.5,
+            "autoRotateInactivityDelay": 0,
+            "mouseZoom": false // allows scrolling past the viewer
+        });
+        
+        // Hide loading indicator when image finishes loading
+        viewer.on('load', function() {
+            document.getElementById('vr-loading').classList.add('vr-loading-hidden');
+
+            if (!hasInteractedWithVR) {
+                const prompt = document.getElementById('vr-interaction-prompt');
+                prompt.classList.add('show-prompt');
+
+                const vrContainer = document.getElementById('vr-overlay');
+                
+                const handleInteraction = (e) => {
+                    if (e && e.target && e.target.classList && e.target.classList.contains('vr-close')) return;
+                    
+                    hasInteractedWithVR = true;
+                    prompt.classList.remove('show-prompt');
+                    
+                    if (viewer) {
+                        if (typeof viewer.stopAutoRotate === 'function') {
+                            viewer.stopAutoRotate();
+                        } else if (typeof viewer.setPitch === 'function') {
+                            viewer.setPitch(viewer.getPitch());
+                            viewer.setYaw(viewer.getYaw());
+                        }
+                    }
+                };
+
+                vrContainer.addEventListener('pointerdown', handleInteraction, { capture: true });
+                vrContainer.addEventListener('mousedown', handleInteraction, { capture: true });
+                vrContainer.addEventListener('touchstart', handleInteraction, { capture: true, passive: true });
+                vrContainer.addEventListener('wheel', handleInteraction, { capture: true, passive: true });
+            }
+        });
+    }
+
+    function nextVR() {
+        currentIndex = (currentIndex + 1) % images360.length;
+        loadPanorama();
+    }
+
+    function prevVR() {
+        currentIndex = (currentIndex - 1 + images360.length) % images360.length;
+        loadPanorama();
+    }
+
+    function scrollToContent() {
+        const nextSection = document.querySelector('.container');
+        if (nextSection) {
+            nextSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // Fallback if user doesn't have a default mail app
+    function copyEmail(e) {
+        navigator.clipboard.writeText("urbanstage3d@gmail.com").then(function() {
+            // Optional: a small alert to let them know it copied
+            alert("Email copied to clipboard: urbanstage3d@gmail.com");
+        }).catch(function(err) {
+            console.error("Could not copy email", err);
+        });
+    }
+
+    function openLightbox(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('image-lightbox').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        document.getElementById('image-lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => { document.getElementById('lightbox-img').src = ""; }, 400);
+    }
+</script>
+
+<script>
+// Hero video playlist & custom play/pause button
+(function() {
+    const videos = ['images/appartvideo.MP4', 'images/erovid.mp4'];
+    let current = 0;
+    const vid = document.getElementById('hero-video');
+    const playBtn = document.getElementById('hero-play-btn');
+    const playIcon = document.getElementById('hero-play-icon');
+
+    const PLAY_PATH = '<path d="M8 5v14l11-7z"></path>';
+    const PAUSE_PATH = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path>';
+
+    function syncPlayUI() {
+        if (!playBtn || !playIcon) return;
+        if (vid.paused) {
+            playBtn.classList.remove('is-playing');
+            playIcon.innerHTML = PLAY_PATH;
+        } else {
+            playBtn.classList.add('is-playing');
+            playIcon.innerHTML = PAUSE_PATH;
+        }
+    }
+
+    if (playBtn && vid) {
+        playBtn.addEventListener('click', function() {
+            if (vid.paused) {
+                vid.play();
+            } else {
+                vid.pause();
+            }
+            syncPlayUI();
+        });
+        vid.addEventListener('play', syncPlayUI);
+        vid.addEventListener('pause', syncPlayUI);
+        syncPlayUI();
+    }
+
+    vid.addEventListener('ended', function() {
+        current = (current + 1) % videos.length;
+        vid.src = videos[current];
+        vid.play();
+    });
+})();
+
+// Navbar scroll state (zero-reflow toggle)
+(function() {
+    const nav = document.getElementById('site-nav');
+    let isScrolled = false;
+    function updateNavState() {
+        const shouldScroll = window.scrollY > 30;
+        if (shouldScroll !== isScrolled) {
+            isScrolled = shouldScroll;
+            nav.classList.toggle('scrolled', isScrolled);
+        }
+    }
+    window.addEventListener('scroll', updateNavState, { passive: true });
+    updateNavState();
+})();
+
+function selectBtn(btn) {
+    document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}
+</script>
+</body>
+</html>

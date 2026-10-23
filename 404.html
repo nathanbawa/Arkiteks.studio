@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="theme-color" content="#F9F7F2"/>
+<title>404 — Page Not Found | Arkiteks Studio</title>
+<link rel="icon" type="image/png" href="images/arkiteksstudio-high-resolution-logo (3).png">
+<link rel="apple-touch-icon" href="images/arkiteksstudio-high-resolution-logo (3).png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    background: #F9F7F2;
+    color: #111111;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+}
+.error-card {
+    background: #F4F0E8;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: clamp(32px, 5vw, 56px);
+    max-width: 560px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+.error-logo {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 6px;
+}
+.error-tag {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #555555;
+}
+h1 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #111111;
+}
+p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: #444;
+    margin-bottom: 10px;
+}
+.btn-home {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    background: #111111;
+    color: #fff;
+    border: 1px solid #111111;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+.btn-home:hover {
+    background: #3a3a3a;
+    border-color: #3a3a3a;
+    transform: translate(-0.25rem, -0.25rem);
+    box-shadow: 0.25rem 0.25rem #000000;
+}
+</style>
+</head>
+<body>
+    <main class="error-card">
+        <img src="images/arkiteksstudio-high-resolution-logo (3).png" alt="Arkiteks Studio Logo" class="error-logo">
+        <span class="error-tag">Error 404</span>
+        <h1>Space Not Built Yet</h1>
+        <p>The page you are looking for does not exist or has been moved. Return to the portfolio to explore our 3D visualizations and virtual tours.</p>
+        <a href="index.html" class="btn-home">Back to Arkiteks Studio</a>
+    </main>
+</body>
+</html>

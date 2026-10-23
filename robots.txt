@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arkiteks.studio/sitemap.xml
