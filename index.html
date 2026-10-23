@@ -74,63 +74,126 @@ a{
 /* NAV */
 /* ========================= */
 
-nav{
-    width:100%;
-    padding:40px 0;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 10px 0;
+    background: transparent;
+    pointer-events: none;
 }
 
-.logo{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
+.site-nav::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(235, 230, 220, 0.9);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    opacity: 0;
+    will-change: opacity;
+    transition: opacity 0.22s ease-out;
+    z-index: -1;
 }
 
-.logo-text{
-    font-size:12px;
-    font-weight:600;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    color:#111;
+.site-nav.scrolled::before {
+    opacity: 1;
+}
+
+.nav-inner {
+    width: 94%;
+    max-width: 1800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.logo-text {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #111;
 }
 
 .nav-profile-pic {
-    height: 40px;
-    width: 40px;
+    height: 76px;
+    width: 76px;
     object-fit: cover;
     border-radius: 50%;
+    transform-origin: top left;
+    transform: translateZ(0) scale(1);
+    will-change: transform;
+    transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 @media (min-width: 769px) {
     .nav-profile-pic {
-        height: 160px;
-        width: 160px;
+        height: 86px;
+        width: 86px;
         object-fit: cover;
         border-radius: 50%;
+        transform: translate3d(0, 6px, 0) scale(2.05);
+    }
+    .site-nav.scrolled .nav-profile-pic {
+        transform: translate3d(0, 0, 0) scale(1);
     }
 }
-.quick-buttons {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+
+.nav-right {
     display: flex;
-    gap: 8px;
+    align-items: center;
+    gap: 24px;
+}
+
+.quick-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .quick-btn {
-    padding: 6px 18px;
-    border: 1.5px solid #111;
-    background: transparent;
-    color: #111;
-    font-size: 11px;
+    --bg: #000;
+    --hover-bg: #a70c39;
+    --hover-text: #fff;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid var(--bg);
+    border-radius: 0;
+    padding: 1.05em 2.35em;
+    background: var(--bg);
+    font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
     font-weight: 500;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: background 0.2s, color 0.2s;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+}
+
+.quick-btn:hover {
+    color: var(--hover-text);
+    transform: translate(-0.25rem, -0.25rem);
+    background: var(--hover-bg);
+    box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+.quick-btn:active {
+    transform: translate(0);
+    box-shadow: none;
 }
 
 .quick-btn.active {
@@ -139,23 +202,19 @@ nav{
     border-color: red;
 }
 
-.nav-links{
-    display:flex;
-    gap:50px;
+.quick-btn.nav-cta-btn {
+    --bg: #fff;
+    color: #111;
+    border: 1px solid #111;
+    background: #fff;
 }
 
-
-.nav-links a{
-    color:#666;
-    font-size:11px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    transition:0.3s;
-    font-weight:500;
-}
-
-.nav-links a:hover{
-    color:#111;
+.quick-btn.nav-cta-btn:hover {
+    color: var(--hover-text);
+    transform: translate(-0.25rem, -0.25rem);
+    background: var(--hover-bg);
+    border-color: var(--hover-bg);
+    box-shadow: 0.25rem 0.25rem #000;
 }
 
 /* ========================= */
@@ -168,7 +227,7 @@ nav{
     align-items:center;
     position:relative;
     padding-bottom:30px;
-    padding-top:20px;
+    padding-top:180px;
 }
 
 .hero-grid{
@@ -176,7 +235,7 @@ nav{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:50px;
-    align-items:end;
+    align-items:center;
 }
 
 .hero-text h1{
@@ -228,7 +287,8 @@ nav{
     overflow:hidden;
 }
 
-.hero-image img{
+.hero-image img,
+.hero-image video{
     width:100%;
     height:100%;
     object-fit:cover;
@@ -904,7 +964,7 @@ footer{
     .layout-asymmetric,
     .about-section{
         grid-template-columns:1fr;
-        gap:20px;
+        gap:24px;
     }
 
     .layout-asymmetric .side-content{
@@ -919,42 +979,72 @@ footer{
         grid-template-columns:1fr;
     }
 
-    nav {
-        padding: 20px 0;
+    .site-nav {
+        padding: 10px 0;
     }
 
     .nav-profile-pic {
-        width: 70px;
-        max-width: 70px;
-        height: auto;
-        aspect-ratio: 1/1;
+        width: 64px;
+        height: 64px;
+        transform: translate3d(0, 2px, 0) scale(1.25);
+    }
+
+    .site-nav.scrolled .nav-profile-pic {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .quick-buttons {
+        gap: 6px;
+        justify-content: flex-end;
+    }
+
+    .quick-btn {
+        padding: 0.8em 1.3em;
+        font-size: 11px;
+        letter-spacing: 1.5px;
     }
 
     .hero {
         min-height: auto;
-        padding-top: 30px;
+        padding-top: 120px;
         padding-bottom: 30px;
-        align-items: flex-start;
+        align-items: center;
+    }
+
+    .hero-text {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .hero-text h1 {
         margin-bottom: 20px;
     }
 
-    .hero-image{
-        aspect-ratio:1/1;
+    .hero-buttons {
+        justify-content: center;
+        margin-top: 10px;
     }
 
-    .nav-links{
-        display:none;
+    .hero-image{
+        aspect-ratio: 4/5;
+    }
+
+    .project-content {
+        max-width: 100%;
+    }
+
+    .layout-full .project-meta {
+        justify-content: flex-start;
     }
 
     .section{
-        padding:25px 0;
+        padding:30px 0;
     }
 
     .projects-list{
-        gap:30px;
+        gap:36px;
     }
 
     .vr-close {
@@ -966,6 +1056,83 @@ footer{
     .vr-nav {
         font-size: 35px;
         padding: 10px;
+    }
+}
+
+@media(max-width:640px){
+
+    .site-nav {
+        padding: 8px 0;
+    }
+
+    .nav-inner {
+        width: 94%;
+        gap: 10px;
+    }
+
+    .nav-profile-pic {
+        width: 48px;
+        height: 48px;
+        transform: translate3d(0, 0, 0) scale(1.15);
+    }
+
+    .site-nav.scrolled .nav-profile-pic {
+        transform: translate3d(0, 0, 0) scale(0.95);
+    }
+
+    .nav-right {
+        flex: 1;
+        justify-content: flex-end;
+        min-width: 0;
+    }
+
+    .quick-buttons {
+        gap: 5px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .quick-btn {
+        padding: 0.65em 0.9em;
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    .quick-btn:hover {
+        transform: translate(-0.15rem, -0.15rem);
+        box-shadow: 0.15rem 0.15rem var(--bg);
+    }
+
+    .hero {
+        padding-top: 105px;
+        padding-bottom: 20px;
+    }
+
+    .hero-text h1 {
+        font-size: clamp(2.6rem, 11vw, 3.6rem);
+        line-height: 0.98;
+        letter-spacing: -1.5px;
+        margin-bottom: 16px;
+    }
+
+    .hero-image {
+        aspect-ratio: 1/1;
+    }
+
+    .intro-statement {
+        padding: 15px 0 25px 0;
+    }
+
+    .layout-full .image-full,
+    .layout-360 .image-full,
+    .layout-asymmetric .image-large {
+        aspect-ratio: 4/3;
+    }
+
+    .badge-360 {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
     }
 }
 
@@ -1001,30 +1168,29 @@ footer{
     <img id="lightbox-img" src="" alt="Fullscreen View">
 </div>
 
-<div class="container">
-
 <!-- ========================= -->
 <!-- NAV -->
 <!-- ========================= -->
 
-<nav>
-    <div class="logo">
-        <div class="logo-text">NATHAN BAWA</div>
-        <img src="images/arkiteksstudio-high-resolution-logo (3).png" alt="Arkiteks Studio Logo" class="nav-profile-pic">
-    </div>
+<nav class="site-nav" id="site-nav">
+    <div class="nav-inner">
+        <div class="logo">
+            <img src="images/arkiteksstudio-high-resolution-logo (3).png" alt="Arkiteks Studio Logo" class="nav-profile-pic">
+        </div>
 
-    <div class="quick-buttons">
-        <button class="quick-btn" onclick="selectBtn(this)">Work</button>
-        <button class="quick-btn" onclick="selectBtn(this)">Studio</button>
-        <button class="quick-btn" onclick="selectBtn(this)">Services</button>
-        <button class="quick-btn" onclick="selectBtn(this)">Contact</button>
-    </div>
-
-    <div class="nav-links">
-        <a href="#work">Selected Work</a>
-        <a href="#about">Studio</a>
+        <div class="nav-right">
+            <div class="quick-buttons">
+                <a href="#work" class="quick-btn" onclick="selectBtn(this)">Work</a>
+                <a href="#about" class="quick-btn" onclick="selectBtn(this)">Studio</a>
+                <a href="#work" class="quick-btn" onclick="selectBtn(this)">Services</a>
+                <a href="#about" class="quick-btn" onclick="selectBtn(this)">Contact</a>
+                <a href="#about" class="quick-btn nav-cta-btn" onclick="selectBtn(this)">Book a call</a>
+            </div>
+        </div>
     </div>
 </nav>
+
+<div class="container">
 
 <!-- ========================= -->
 <!-- HERO -->
@@ -1046,8 +1212,10 @@ footer{
             </div>
         </div>
 
-        <div class="hero-image image-container" onclick="openLightbox(this.querySelector('img').src)" style="cursor: zoom-in;">
-            <img src="images/herokitchen.png" alt="Luxury Interior Visualization">
+        <div class="hero-image">
+            <video id="hero-video" autoplay muted playsinline>
+                <source src="images/appartvideo.MP4" type="video/mp4">
+            </video>
         </div>
 
     </div>
@@ -1317,6 +1485,33 @@ footer{
 </script>
 
 <script>
+// Hero video playlist
+(function() {
+    const videos = ['images/appartvideo.MP4', 'images/erovid.mp4'];
+    let current = 0;
+    const vid = document.getElementById('hero-video');
+    vid.addEventListener('ended', function() {
+        current = (current + 1) % videos.length;
+        vid.src = videos[current];
+        vid.play();
+    });
+})();
+
+// Navbar scroll state (zero-reflow toggle)
+(function() {
+    const nav = document.getElementById('site-nav');
+    let isScrolled = false;
+    function updateNavState() {
+        const shouldScroll = window.scrollY > 30;
+        if (shouldScroll !== isScrolled) {
+            isScrolled = shouldScroll;
+            nav.classList.toggle('scrolled', isScrolled);
+        }
+    }
+    window.addEventListener('scroll', updateNavState, { passive: true });
+    updateNavState();
+})();
+
 function selectBtn(btn) {
     document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
