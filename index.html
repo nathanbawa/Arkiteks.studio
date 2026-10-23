@@ -462,27 +462,45 @@ a{
     align-items: center;
 }
 
+.mobile-hero-logo {
+    display: none;
+}
+
 @media (max-width: 900px) {
     .split-hero {
-        grid-template-columns: minmax(0, 1fr);
+        display: flex;
+        flex-direction: column;
         margin-top: 96px;
         margin-bottom: 24px;
-        padding: 12px;
-        gap: 0;
+        padding: 20px 18px;
+        gap: 20px;
         background: #F4F0E8;
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 10px;
     }
 
-    .split-hero__media {
-        grid-area: 1 / 1;
-        z-index: 1;
-        justify-self: stretch;
+    .split-hero__text {
         width: 100%;
-        height: 100%;
-        min-height: 540px;
         max-width: 100%;
-        aspect-ratio: auto;
+        margin: 0;
+        padding: 4px 2px;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .split-hero__media {
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 4 / 5;
+        min-height: 0;
         padding: 0;
         background: transparent;
         border: none;
@@ -492,25 +510,6 @@ a{
         width: 100%;
         height: 100%;
         border-radius: 8px;
-    }
-
-    .split-hero__text {
-        grid-area: 1 / 1;
-        z-index: 2;
-        align-self: end;
-        justify-self: center;
-        margin: 12px;
-        width: calc(100% - 24px);
-        max-width: calc(100% - 24px);
-        min-width: 0;
-        aspect-ratio: auto;
-        padding: 0;
-        background: rgba(249, 247, 242, 0.78);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        border-radius: 10px;
-        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
     }
 }
 
@@ -2569,29 +2568,22 @@ footer {
     color: #555;
     border-color: #111;
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .site-nav {
-        padding: 8px 0 10px 0;
+        padding: 10px 0;
+    }
+    .site-nav.scrolled {
+        padding: 10px 0;
     }
     .nav-inner {
-        width: 94%;
+        width: 97%;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-    }
-    .logo {
-        width: 100%;
-        display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
     }
-    .nav-profile-pic,
-    .site-nav.scrolled .nav-profile-pic {
-        width: 72px;
-        height: 72px;
-        transform: none;
+    .site-nav .logo {
+        display: none !important;
     }
     .nav-right {
         width: 100%;
@@ -2612,35 +2604,67 @@ footer {
         white-space: nowrap;
         text-align: center;
         justify-content: center;
-        padding: 0.72em 0.35em;
-        font-size: 10px;
-        letter-spacing: 0.04em;
-        line-height: 1;
+        padding: 1.05em 0.45em;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        line-height: 1.1;
+    }
+    .mobile-hero-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 68px;
+        margin-bottom: 16px;
+        width: 100%;
+    }
+    .mobile-hero-logo__img {
+        width: 116px;
+        height: 116px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
     }
     .split-hero {
-        margin-top: 138px;
+        margin-top: 0;
+    }
+}
+@media (max-width: 640px) {
+    .quick-btn {
+        padding: 1em 0.35em;
+        font-size: 10.5px;
+        letter-spacing: 0.03em;
+    }
+    .split-hero {
+        margin-top: 0;
         margin-bottom: 20px;
-        padding: 10px;
-        gap: 0;
+        padding: 18px 16px;
+        gap: 18px;
     }
     .split-hero__media {
         padding: 0;
-        min-height: 520px;
-        aspect-ratio: auto;
+        min-height: 0;
+        aspect-ratio: 4 / 5;
     }
     .split-hero__text {
-        margin: 10px;
-        width: calc(100% - 20px);
-        max-width: calc(100% - 20px);
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
         padding: 0;
-        background: rgba(249, 247, 242, 0.78);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+    .split-hero__eyebrow {
+        margin-bottom: 0.6rem;
     }
     .split-hero__headline {
-        margin-bottom: 0.75rem;
+        font-size: clamp(2rem, 8vw, 2.6rem);
+        margin-bottom: 0.85rem;
     }
     .split-hero__desc {
+        font-size: 0.96rem;
+        line-height: 1.55;
         margin-bottom: 1.25rem;
         color: #1a1a1a;
     }
@@ -2946,15 +2970,12 @@ textarea:focus-visible,
 /* Extra Small Mobile Screens (iPhone SE <= 380px) */
 @media (max-width: 380px) {
     .quick-btn {
-        padding: 0.48em 0.58em;
+        padding: 0.88em 0.25em;
         font-size: 9.5px;
     }
     .service-card,
     .about-section-centered {
         padding: 18px 14px;
-    }
-    .split-hero__slide {
-        padding: 14px;
     }
     #scroll-top-btn {
         bottom: 16px;
@@ -2965,110 +2986,8 @@ textarea:focus-visible,
 }
 
 /* === MOBILE COMPACT MODE FOR SERVICES (ACCORDION) & HOW IT WORKS (HORIZONTAL SWIPE) === */
-.service-card__toggle-icon,
-.split-hero__swipe-circle {
+.service-card__toggle-icon {
     display: none;
-}
-
-@media (max-width: 900px) {
-    .split-hero__text {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start !important;
-        align-items: center;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        gap: 0 !important;
-        padding: 0 !important;
-        min-width: 0;
-    }
-    .split-hero__text::-webkit-scrollbar {
-        display: none;
-    }
-    .split-hero__slide {
-        flex: 0 0 100%;
-        width: 100%;
-        min-width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-        padding: 16px 18px;
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .split-hero__slide--main {
-        position: relative;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 18px 54px;
-    }
-    .split-hero__main-copy {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        width: 100%;
-        min-width: 0;
-    }
-    .split-hero__slide--main .split-hero__eyebrow {
-        display: none;
-    }
-    .split-hero__slide--main .split-hero__headline {
-        font-size: clamp(1.45rem, 5.4vw, 1.95rem);
-        line-height: 1.08;
-        margin-bottom: 0;
-        text-align: center;
-    }
-    .split-hero__swipe-circle {
-        position: absolute;
-        right: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        border: 1px solid rgba(17, 17, 17, 0.25);
-        background: rgba(255, 255, 255, 0.72);
-        color: #111111;
-        cursor: pointer;
-        padding: 0;
-        transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    }
-    .split-hero__swipe-circle:hover,
-    .split-hero__swipe-circle:active {
-        background: #111111;
-        color: #ffffff;
-        border-color: #111111;
-    }
-    .split-hero__swipe-circle svg {
-        width: 16px;
-        height: 16px;
-        stroke: currentColor;
-        stroke-width: 2;
-        fill: none;
-    }
-    .split-hero__slide--sub .split-hero__desc {
-        font-size: 13px;
-        line-height: 1.45;
-        margin-bottom: 10px;
-    }
-    .split-hero__slide--sub .split-hero__actions .split-hero__btn {
-        padding: 0.6rem 0.75rem;
-        font-size: 10.5px;
-    }
 }
 
 @media (max-width: 768px) {
@@ -3188,30 +3107,23 @@ textarea:focus-visible,
 <!-- HERO (YORK-INSPIRED SPLIT) -->
 <!-- ========================= -->
 
+<div class="mobile-hero-logo">
+    <img src="images/arkiteksstudio-high-resolution-logo (3).png" alt="Arkiteks Studio Logo" class="mobile-hero-logo__img">
+</div>
+
 <section class="split-hero">
     <!-- Left Column: Text -->
-    <div class="split-hero__text" id="hero-swipe-card">
-        <div class="split-hero__slide split-hero__slide--main">
-            <div class="split-hero__main-copy">
-                <span class="split-hero__eyebrow">Interior Visualization</span>
-                <h1 class="split-hero__headline">
-                    Visit spaces before<br>they even exist.
-                </h1>
-            </div>
-            <button type="button" class="split-hero__swipe-circle" id="hero-swipe-next" aria-label="Scroll right to read more">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-        </div>
-        <div class="split-hero__slide split-hero__slide--sub">
-            <p class="split-hero__desc">
-                Partnering with designers and architects to craft photorealistic, emotionally resonant visual narratives of unbuilt spaces.
-            </p>
-            <div class="split-hero__actions">
-                <a href="#work" class="split-hero__btn split-hero__btn--primary">View Selected Work</a>
-                <a href="#studio" class="split-hero__btn split-hero__btn--secondary">Studio</a>
-            </div>
+    <div class="split-hero__text">
+        <span class="split-hero__eyebrow">Interior Visualization</span>
+        <h1 class="split-hero__headline">
+            Visit spaces before<br>they even exist.
+        </h1>
+        <p class="split-hero__desc">
+            Partnering with designers and architects to craft photorealistic, emotionally resonant visual narratives of unbuilt spaces.
+        </p>
+        <div class="split-hero__actions">
+            <a href="#work" class="split-hero__btn split-hero__btn--primary">View Selected Work</a>
+            <a href="#studio" class="split-hero__btn split-hero__btn--secondary">Studio</a>
         </div>
     </div>
 
@@ -4481,21 +4393,6 @@ var PROJECTS = [
                 feedbackEl.classList.add("is-visible");
             }
             window.location.href = "mailto:arkiteks.studios@gmail.com?subject=" + subject + "&body=" + body;
-        });
-    }
-
-    // Mobile Hero horizontal swipe button
-    var heroSwipeCard = document.getElementById("hero-swipe-card");
-    var heroSwipeNext = document.getElementById("hero-swipe-next");
-    if (heroSwipeCard) {
-        heroSwipeCard.scrollLeft = 0;
-    }
-    if (heroSwipeCard && heroSwipeNext) {
-        heroSwipeNext.addEventListener("click", function() {
-            heroSwipeCard.scrollTo({
-                left: heroSwipeCard.clientWidth,
-                behavior: "smooth"
-            });
         });
     }
 
