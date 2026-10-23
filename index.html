@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Nathan Bawa | Interior Visualization</title>
+<link rel="icon" type="image/png" href="images/arkiteksstudio-high-resolution-logo.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,15 +97,53 @@ nav{
 }
 
 .nav-profile-pic {
-    height:40px;
-    width:auto;
-    object-fit:contain;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@media (min-width: 769px) {
+    .nav-profile-pic {
+        height: 160px;
+        width: 160px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+}
+.quick-buttons {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.quick-btn {
+    padding: 6px 18px;
+    border: 1.5px solid #111;
+    background: transparent;
+    color: #111;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.quick-btn.active {
+    background: red;
+    color: #fff;
+    border-color: red;
 }
 
 .nav-links{
     display:flex;
     gap:50px;
 }
+
 
 .nav-links a{
     color:#666;
@@ -971,7 +1010,14 @@ footer{
 <nav>
     <div class="logo">
         <div class="logo-text">NATHAN BAWA</div>
-        <img src="images/logo.1.png" alt="Arkiteks Studio Logo" class="nav-profile-pic">
+        <img src="images/arkiteksstudio-high-resolution-logo (3).png" alt="Arkiteks Studio Logo" class="nav-profile-pic">
+    </div>
+
+    <div class="quick-buttons">
+        <button class="quick-btn" onclick="selectBtn(this)">Work</button>
+        <button class="quick-btn" onclick="selectBtn(this)">Studio</button>
+        <button class="quick-btn" onclick="selectBtn(this)">Services</button>
+        <button class="quick-btn" onclick="selectBtn(this)">Contact</button>
     </div>
 
     <div class="nav-links">
@@ -1270,5 +1316,11 @@ footer{
     }
 </script>
 
+<script>
+function selectBtn(btn) {
+    document.querySelectorAll('.quick-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}
+</script>
 </body>
 </html>
